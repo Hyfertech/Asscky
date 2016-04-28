@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Asscky</string>
+    <string name="sign_up_text">Sign Up</string>
+    <string name="sign_in_text">Sign In</string>
+    <string name="email_hint">E-mail Address</string>
+    <string name="password_hint">Password</string>
+    <string name="dialog_error_title">Hee-Awwww there was a problem</string>
+    <string name="dialog_no_network_message">Seems like you are not connected to the internet</string>
+    <string name="dialog_settings">Open settings</string>
+    <string name="dialog_close">Close</string>
+</resources>
