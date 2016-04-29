@@ -7,22 +7,22 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 
 import com.hypherweb.www.asscky.R;
 
-import butterknife.BindView;
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class SignInSignUp extends AppCompatActivity {
 
-    @BindView(R.id.signInButton)
-    Button mSignInButton;
+    @Bind(R.id.signUpButton) Button mSignupButton;
 
-    @BindView(R.id.signUpButton)
-    Button mSignUpButton;
+    @Bind(R.id.signInButton) Button mSignInButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +30,40 @@ public class SignInSignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in_sign_up);
         ButterKnife.bind(this);
 
-        if( isNetworkAvailable() ){
-            String message = getResources().getString(R.string.dialog_no_network_message);
-            noPermissionCreateDialog(message, getApplicationContext());
+        if (!isNetworkAvailable(SignInSignUp.this)) {
+            noNetworkAvailableDialog();
         }
+
+        mSignInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(SignInSignUp.this, LoginActivty.class);
+                SignInSignUp.this.startActivity(myIntent);
+            }
+        });
+
+        mSignupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(SignInSignUp.this, SignUpActivity.class);
+                SignInSignUp.this.startActivity(myIntent);
+            }
+        });
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (!isNetworkAvailable(SignInSignUp.this)) {
+            noNetworkAvailableDialog();
+        }
+    }
+
+    private void noNetworkAvailableDialog() {
+        String message = getResources().getString(R.string.dialog_no_network_message);
+        noPermissionCreateDialog(message, SignInSignUp.this);
+    }
 
 
     /**
@@ -46,13 +73,14 @@ public class SignInSignUp extends AppCompatActivity {
      * @param message Message on the Alert Dialog
      * @return
      */
-    public AlertDialog.Builder createAlertDialog(String title, String message, Context context) {
+    public static android.app.AlertDialog.Builder createAlertDialog(String title, String message, Context context) {
         //Creating an alert window.
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
         builder.setTitle(title);
         builder.setMessage(message);
         return builder;
     }
+//    public android.app.AlertDialog.Builder
 
 
     /**
@@ -60,11 +88,11 @@ public class SignInSignUp extends AppCompatActivity {
      */
     public void noPermissionCreateDialog(String message, Context context) {
 
-        AlertDialog.Builder builder = createAlertDialog(getResources().getString(R.string.dialog_error_title), message, context);
+        android.app.AlertDialog.Builder builder = createAlertDialog(getResources().getString(R.string.dialog_error_title), message, context);
         builder.setPositiveButton(getResources().getString(R.string.dialog_settings), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivityForResult(new Intent(Settings.ACTION_APPLICATION_SETTINGS), 0);
+                startActivityForResult(new Intent(Settings.ACTION_NETWORK_OPERATOR_SETTINGS), 0);
             }
 
         });
@@ -76,18 +104,30 @@ public class SignInSignUp extends AppCompatActivity {
                     }
                 });
         builder.setCancelable(false);
-        AlertDialog dialog = builder.create();
+        android.app.AlertDialog dialog = builder.create();
         dialog.show();
 
     }
 
-    private boolean isNetworkAvailable() {
-//        boolean returnVAl = false;
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        boolean isConntect = activeNetworkInfo.isConnected();
-        boolean isActive = activeNetworkInfo != null;
-        return  isConntect && isActive;
+    /**
+     * Checks if phone is connected to the internet.
+     *
+     * @param context
+     * @return
+     */
+    public static boolean isNetworkAvailable(Context context) {
+        boolean isConnectionAvail = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null)
+                return netInfo.isConnected();
+            else
+                return isConnectionAvail;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isConnectionAvail;
     }
 }
