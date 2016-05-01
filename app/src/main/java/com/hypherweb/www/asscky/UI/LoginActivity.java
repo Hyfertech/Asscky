@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onAuthenticated(AuthData authData) {
                             Log.d(TAG, "WORKED");
+
                         }
 
                         @Override

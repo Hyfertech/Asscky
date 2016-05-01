@@ -49,6 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess() {
                             Log.d(TAG, "It worked");
+
                         }
 
                         @Override
