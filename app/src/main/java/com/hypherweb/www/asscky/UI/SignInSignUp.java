@@ -37,7 +37,7 @@ public class SignInSignUp extends AppCompatActivity {
         mSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(SignInSignUp.this, LoginActivty.class);
+                Intent myIntent = new Intent(SignInSignUp.this, LoginActivity.class);
                 SignInSignUp.this.startActivity(myIntent);
             }
         });
@@ -59,6 +59,7 @@ public class SignInSignUp extends AppCompatActivity {
             noNetworkAvailableDialog();
         }
     }
+
 
     private void noNetworkAvailableDialog() {
         String message = getResources().getString(R.string.dialog_no_network_message);

@@ -8,4 +8,8 @@
     <string name="dialog_no_network_message">Seems like you are not connected to the internet</string>
     <string name="dialog_settings">Open settings</string>
     <string name="dialog_close">Close</string>
+    <string name="dialog_okay">Okay</string>
+    <string name="error_validator_email">Enter a valid email address.</string>
+    <string name="error_validator_password">Enter 4 and 10 alphanumeric characters.</string>
+    <string name="firebase_url">https://assckyapp.firebaseio.com</string>
 </resources>

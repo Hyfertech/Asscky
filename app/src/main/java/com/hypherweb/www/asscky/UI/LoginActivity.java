@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.hypherweb.www.asscky.R;
@@ -16,44 +17,43 @@ import com.hypherweb.www.asscky.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class SignUpActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
-
-    public static String TAG = SignUpActivity.class.getSimpleName();
-    @Bind(R.id.signupEmailText)
+    public static final String TAG = LoginActivity.class.getSimpleName();
+    @Bind(R.id.loginEmailText)
     EditText mEmailText;
 
-    @Bind(R.id.signupPasswordText)
+    @Bind(R.id.loginPasswordText)
     EditText mPasswordText;
 
-    @Bind(R.id.signupSignupButton)
-    Button mSignUpButton;
+    @Bind(R.id.loginSigninButton)
+    Button mLoginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        String firebase_url = getResources().getString(R.string.firebase_url);
-        Log.d(TAG, firebase_url);
-        final Firebase myFirebaseRef = new Firebase(firebase_url);
+        String firebaseUrl = getResources().getString(R.string.firebase_url);
+        final Firebase myFirebase = new Firebase(firebaseUrl);
 
-        mSignUpButton.setOnClickListener(new View.OnClickListener() {
+        mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validate()) {
+                if ( validate()) {
                     String email = mEmailText.getText().toString();
                     String password = mPasswordText.getText().toString();
-                    myFirebaseRef.createUser(email, password, new Firebase.ResultHandler() {
+                    myFirebase.authWithPassword(email, password, new Firebase.AuthResultHandler() {
                         @Override
-                        public void onSuccess() {
-                            Log.d(TAG, "It worked");
+                        public void onAuthenticated(AuthData authData) {
+                            Log.d(TAG, "WORKED");
                         }
 
                         @Override
-                        public void onError(FirebaseError firebaseError) {
-                            signupFailedAlertDialog(firebaseError.getMessage());
+                        public void onAuthenticationError(FirebaseError firebaseError) {
+                            String message = firebaseError.getMessage();
+                            signinFailedAlertDialog(message);
                         }
                     });
                 }
@@ -87,23 +87,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    public void signupFailedAlertDialog(String message) {
-        validationErrorAlertDialog(message, SignUpActivity.this);
-    }
-
-    /**
-     * Creates an alert dialog with the passed title and message.
-     *
-     * @param title   Title for the Alert Dialog
-     * @param message Message on the Alert Dialog
-     * @return
-     */
-    public static android.app.AlertDialog.Builder createAlertDialog(String title, String message, Context context) {
-        //Creating an alert window.
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        return builder;
+    public void signinFailedAlertDialog(String message) {
+        validationErrorAlertDialog(message, LoginActivity.this);
     }
 
     /**
@@ -111,7 +96,8 @@ public class SignUpActivity extends AppCompatActivity {
      */
     public void validationErrorAlertDialog(String message, Context context) {
 
-        android.app.AlertDialog.Builder builder = createAlertDialog(getResources().getString(R.string.dialog_error_title), message, context);
+        android.app.AlertDialog.Builder builder = SignUpActivity.createAlertDialog(getResources().getString(R.string.dialog_error_title),
+                message, context);
 
         builder.setPositiveButton(getResources().getString(R.string.dialog_okay), new DialogInterface.OnClickListener() {
             @Override

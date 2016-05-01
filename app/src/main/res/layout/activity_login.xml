@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.hypherweb.www.asscky.UI.LoginActivty">
+    tools:context=".UI.LoginActivity">
 
     <EditText
         android:id="@+id/loginEmailText"
@@ -21,7 +21,7 @@
         android:inputType="textEmailAddress"/>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/loginPasswordText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/loginEmailText"
@@ -35,7 +35,7 @@
         android:id="@+id/loginSigninButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/loginPasswordText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:text="@string/sign_in_text"/>
