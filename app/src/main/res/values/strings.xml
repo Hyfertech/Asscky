@@ -1,15 +1,62 @@
 <resources>
     <string name="app_name">Asscky</string>
-    <string name="sign_up_text">Sign Up</string>
-    <string name="sign_in_text">Sign In</string>
+    <string name="sign_in_text" translatable="true">Sign In</string>
+    <string name="sign_up_text" translatable="true">Sign Up</string>
+    <string name="title_activity_login_activty">Sign in</string>
     <string name="email_hint">E-mail Address</string>
     <string name="password_hint">Password</string>
-    <string name="dialog_error_title">Hee-Awwww there was a problem</string>
+    <string name="signed_out_toast">You have been signed out.</string>
+    <string name="club_information_office_location">Office Location</string>
+    <string name="club_information_hours">Hours</string>
+    <string name="club_information_contact_info">Contact information</string>
+
+    <!--Dialog strings-->
+    <string name="dialog_error_title">Seems like there was a problem</string>
     <string name="dialog_no_network_message">Seems like you are not connected to the internet</string>
     <string name="dialog_settings">Open settings</string>
     <string name="dialog_close">Close</string>
     <string name="dialog_okay">Okay</string>
+    <string name="progress_bar_creating_account">Creating Account...</string>
+    <string name="progress_bar_authenticating">Authenticating...</string>
+    <string name="progress_bar_please_wait">Please wait... </string>
+
+
+    <!--Error Strings -->
     <string name="error_validator_email">Enter a valid email address.</string>
     <string name="error_validator_password">Enter 4 and 10 alphanumeric characters.</string>
-    <string name="firebase_url">https://assckyapp.firebaseio.com</string>
+    <string name="auth_failed_to_create">Failed to create account. Please try again.</string>
+    <string name="auth_failed_to_login">Failed to login to the account. Please try again.</string>
+    <string name="error_board_description_empty">Please enter a board description.</string>
+    <string name="error_board_title_empty">You board must have a title.</string>
+
+    <!--Menu Strings-->
+    <string name="menu_sign_out">Sign Out</string>
+    <string name="title_activity_home_page">Project Unify</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="menu_quite_board">Quit Board</string>
+
+
+    <!--Fragment Names-->
+    <string name="fragment_title_create_board">Create a Board</string>
+    <string name="fragment_title_join_board">Join a Board</string>
+
+    <!--Placeholder texts-->
+    <string name="placeholder_news_feed_club_name">de Finibus Bonorum</string>
+    <string name="placeholder_news_feed_club_text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+        ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </string>
+
+    <!--Create board fragment-->
+    <string name="label_board_info">Board Info</string>
+    <string name="hint_board_title">Board Title</string>
+    <string name="hint_board_description">Description</string>
+    <string name="create_board_button">Create Board</string>
+    <string name="hint_additional_notes">Notes(Optional)</string>
+    <string name="board_reference">boards</string>
+
+    <!--New board Activity-->
+    <string name="quit_board_successfully">You have successfully quit the board.</string>
 </resources>

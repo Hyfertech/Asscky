@@ -1,0 +1,82 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/dp_20"
+    tools:context="com.hypherweb.www.asscky.View.Fragments.CreateBoardFragment">
+
+
+    <TextView
+        android:id="@+id/label_board_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:text="@string/label_board_info"
+        android:textSize="@dimen/label_text_size"
+        />
+
+    <EditText
+        android:id="@+id/board_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/label_board_info"
+        android:layout_alignStart="@+id/label_board_info"
+        android:layout_below="@+id/label_board_info"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@drawable/edit_text_background"
+        android:drawableLeft="@drawable/ic_business"
+        android:drawablePadding="@dimen/dp_20"
+        android:hint="@string/hint_board_title"
+        android:inputType="textPersonName"
+        android:padding="@dimen/dp_20"/>
+
+
+    <EditText
+        android:id="@+id/board_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/label_board_info"
+        android:layout_alignStart="@+id/label_board_info"
+        android:layout_below="@+id/board_title"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@drawable/edit_text_background"
+        android:drawableLeft="@drawable/ic_description"
+        android:drawablePadding="@dimen/dp_20"
+        android:hint="@string/hint_board_description"
+        android:inputType="textPersonName"
+        android:padding="@dimen/dp_20"/>
+
+    <EditText
+        android:id="@+id/board_notes_optional"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/max_height_notes_edit_text"
+        android:layout_alignLeft="@+id/label_board_info"
+        android:layout_alignStart="@+id/label_board_info"
+        android:layout_below="@+id/board_description"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@drawable/edit_text_background"
+        android:drawableLeft="@drawable/ic_note_add"
+        android:drawablePadding="@dimen/dp_20"
+        android:hint="@string/hint_additional_notes"
+        android:inputType="textPersonName"
+        android:padding="@dimen/dp_20"/>
+
+    <Button
+        android:id="@+id/create_board_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="116dp"
+        android:text="@string/create_board_button"/>
+
+</RelativeLayout>

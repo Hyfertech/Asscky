@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.hypherweb.www.asscky.UI.SignUpActivity">
+    tools:context="com.hypherweb.www.asscky.View.SignUpActivity">
 
 
     <EditText

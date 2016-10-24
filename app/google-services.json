@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "701325897280",
+    "firebase_url": "https://asscky-3e017.firebaseio.com",
+    "project_id": "asscky-3e017",
+    "storage_bucket": "asscky-3e017.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701325897280:android:92119d7fc2b39c8e",
+        "android_client_info": {
+          "package_name": "com.hypherweb.www.asscky"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "701325897280-knh24spebaih4n32qsajtfed5gfr62kt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCu7x6toYlSX4VRZbPyQT3kXzuhH55MtAc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
