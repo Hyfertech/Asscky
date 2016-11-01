@@ -1,5 +1,8 @@
 package com.hypherweb.www.asscky.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
@@ -9,29 +12,30 @@ import java.util.Map;
  * Created by AirUnknown on 2016-10-23.
  */
 
-public class Board {
-
-    public static final String BOARD_TITLE = "title";
-    public static final String BOARD_OWNER_EMAIL = "owner";
-    public static final String BOARD_DESCRIPTION = "description";
-    public static final String BOARD_ADDITIONAL_NOTES = "additional_notes";
-    public static final String BOARD_MESSAGES = "messages";
+public class Board implements Parcelable {
 
     String mTitle;
     String mOwner;
     String mDescription;
+    String mBoardNumber;
     String mAdditionalNotes;
+
 
     public Map<String, Boolean> boards = new HashMap<>();
 
     public Board() {
     }
 
-    public Board(String title, String owner, String description, String additionalNotes) {
+    public Board(HashMap<String, Object> board) {
+
+    }
+
+    public Board(String title, String description, String owner, String boardNumber, String additionalNotes) {
         mTitle = title;
         mOwner = owner;
         mDescription = description;
-        if(additionalNotes.equals(null) || additionalNotes.isEmpty() || additionalNotes.equals("")) {
+        mBoardNumber = boardNumber;
+        if (additionalNotes.equals(null) || additionalNotes.isEmpty() || additionalNotes.equals("")) {
 
             mAdditionalNotes = "N/A";
         } else {
@@ -39,16 +43,90 @@ public class Board {
         }
     }
 
+    protected Board(Parcel in) {
+        mTitle = in.readString();
+        mOwner = in.readString();
+        mDescription = in.readString();
+        mBoardNumber = in.readString();
+        mAdditionalNotes = in.readString();
+    }
+
+    public static final Creator<Board> CREATOR = new Creator<Board>() {
+        @Override
+        public Board createFromParcel(Parcel in) {
+            return new Board(in);
+        }
+
+        @Override
+        public Board[] newArray(int size) {
+            return new Board[size];
+        }
+    };
+
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public String getOwner() {
+        return mOwner;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public String getAdditionalNotes() {
+        return mAdditionalNotes;
+    }
+
+    public String getBoardNumber() {
+        return mBoardNumber;
+    }
+
+    public void setTitle(String title) {
+        mTitle = title;
+    }
+
+    public void setOwner(String owner) {
+        mOwner = owner;
+    }
+
+    public void setDescription(String description) {
+        mDescription = description;
+    }
+
+    public void setBoardNumber(String boardNumber) {
+        mBoardNumber = boardNumber;
+    }
+
+    public void setAdditionalNotes(String additionalNotes) {
+        mAdditionalNotes = additionalNotes;
+    }
+
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put(BOARD_TITLE, mTitle);
-        result.put(BOARD_OWNER_EMAIL, mOwner);
-        result.put(BOARD_DESCRIPTION, mDescription);
-        result.put(BOARD_ADDITIONAL_NOTES, mAdditionalNotes);
-        result.put(BOARD_MESSAGES, null);
+        result.put(Constants.BOARD_TITLE, mTitle);
+        result.put(Constants.BOARD_OWNER_EMAIL, getOwner());
+        result.put(Constants.BOARD_DESCRIPTION, getDescription());
+        result.put(Constants.BOARD_ADDITIONAL_NOTES, getAdditionalNotes());
+        result.put(Constants.BOARD_NUMBER, getBoardNumber());
         return result;
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mTitle);
+        dest.writeString(mOwner);
+        dest.writeString(mDescription);
+        dest.writeString(mBoardNumber);
+        dest.writeString(mAdditionalNotes);
+    }
 }

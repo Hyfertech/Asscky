@@ -10,14 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hypherweb.www.asscky.Model.Board;
+import com.hypherweb.www.asscky.Model.Constants;
 import com.hypherweb.www.asscky.R;
-import com.hypherweb.www.asscky.View.NewBoardActivity;
+import com.hypherweb.www.asscky.View.BoardActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +33,8 @@ public class CreateBoardFragment extends Fragment {
 
     final String TAG = CreateBoardFragment.class.getSimpleName();
     public static final String BOARD_NUM = "board_num";
+    public static final String BOARD = "board";
+
     EditText mBoardTitle;
     EditText mBoardDescription;
     EditText mBoardNotesOptional;
@@ -52,7 +57,7 @@ public class CreateBoardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_create_board, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_create_board, container, false);
         mBoardsReference = getString(R.string.board_reference);
 
         myRef = database.getReference(mBoardsReference);
@@ -69,23 +74,37 @@ public class CreateBoardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (validateBoardInfo()) {
-                    String boardNum = getRandomString(6);
+                    final String boardNum = getRandomString(6);
                     String boardTitle = mBoardTitle.getText().toString();
                     String boardAdditionalNotes = mBoardNotesOptional.getText().toString();
                     String boardDescription = mBoardDescription.getText().toString();
-                    Board board = new Board(boardTitle, boardDescription, mFirebaseUser.getEmail(), boardAdditionalNotes);
+                    final Board board = new Board(boardTitle, boardDescription, mFirebaseUser.getEmail(), boardNum ,boardAdditionalNotes);
                     Map<String, Object> childUpdates = board.toMap();
                     Map<String, Object> currentBoard = new HashMap();
                     currentBoard.put(boardNum, childUpdates);
-                    myRef.updateChildren(currentBoard);
-                    ProgressDialog progressDialog = ProgressDialog.show(getActivity(),
-                            getString(R.string.progress_bar_authenticating),
-                            getString(R.string.progress_bar_please_wait));
-                    Intent i = new Intent(getActivity(), NewBoardActivity.class);
-                    startActivity(i);
-                    i.putExtra(BOARD_NUM, boardNum);
-                    progressDialog.dismiss();
-                    getActivity().finish();
+
+                    final ProgressDialog progressDialog = ProgressDialog.show(getActivity(),
+                            getString(R.string.progress_bar_creating_your_board),
+                            getString(R.string.progress_bar_will_take_a_second));
+                    progressDialog.show();
+
+                    myRef.updateChildren(currentBoard, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                            if (databaseError != null) {
+                                Toast.makeText(rootView.getContext(),
+                                        getString(R.string.error_unable_to_create_board), Toast.LENGTH_LONG).show();
+                                progressDialog.dismiss();
+
+                            } else {
+                                Intent i = new Intent(getActivity(), BoardActivity.class);
+                                i.putExtra(Constants.BOARD_NUMBER, boardNum);
+                                startActivity(i);
+                                progressDialog.dismiss();
+                                getActivity().finish();
+                            }
+                        }
+                    });
                 }
             }
         });

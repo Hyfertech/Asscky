@@ -6,9 +6,13 @@
     <!--app dimensions-->
     <dimen name="dp_10">10dp</dimen>
     <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_30">30dp</dimen>
+    <dimen name="dp_60">60dp</dimen>
 
     <!--Text sizes-->
     <dimen name="label_text_size">20sp</dimen>
+    <dimen name="message_text_size">19sp</dimen>
+    <dimen name="date_text_size">14sp</dimen>
 
     <!--Edit text height-->
     <dimen name="max_height_notes_edit_text">100dp</dimen>

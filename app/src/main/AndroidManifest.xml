@@ -35,7 +35,7 @@
         </activity>
         <activity android:name=".View.HomePageActivity">
         </activity>
-        <activity android:name=".View.NewBoardActivity">
+        <activity android:name=".View.BoardActivity">
         </activity>
     </application>
 

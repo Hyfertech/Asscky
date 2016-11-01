@@ -1,14 +1,132 @@
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/dp_20"
     tools:context="com.hypherweb.www.asscky.View.Fragments.JoinBoardFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/join_board_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_30"
+        android:text="@string/enter_board_number"
+        android:textSize="@dimen/label_text_size"/>
+
+    <RelativeLayout
+        android:id="@+id/relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/join_board_title"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_60">
+
+        <EditText
+            android:id="@+id/num_one_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_background"
+            android:hint="@string/join_board_char_hint_number"
+            android:inputType="textVisiblePassword"
+            android:maxLength="1"
+            android:padding="@dimen/dp_20"
+            />
+
+        <EditText
+            android:id="@+id/num_two_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/num_one_text"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_toEndOf="@+id/num_one_text"
+            android:layout_toRightOf="@+id/num_one_text"
+            android:background="@drawable/edit_text_background"
+            android:hint="@string/join_board_char_hint_alphabet"
+            android:inputType="textVisiblePassword"
+            android:maxLength="1"
+            android:padding="@dimen/dp_20"
+            />
+
+        <EditText
+            android:id="@+id/num_three_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/num_two_text"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_toEndOf="@+id/num_two_text"
+            android:layout_toRightOf="@+id/num_two_text"
+            android:background="@drawable/edit_text_background"
+            android:hint="@string/join_board_char_hint_number"
+            android:inputType="textVisiblePassword"
+            android:maxLength="1"
+            android:padding="@dimen/dp_20"
+            />
+
+        <EditText
+            android:id="@+id/num_four_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/num_three_text"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_toEndOf="@+id/num_three_text"
+            android:layout_toRightOf="@+id/num_three_text"
+            android:background="@drawable/edit_text_background"
+            android:hint="@string/join_board_char_hint_alphabet"
+            android:inputType="textVisiblePassword"
+            android:maxLength="1"
+            android:padding="@dimen/dp_20"
+            />
+
+        <EditText
+            android:id="@+id/num_five_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/num_four_text"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_toEndOf="@+id/num_four_text"
+            android:layout_toRightOf="@+id/num_four_text"
+            android:background="@drawable/edit_text_background"
+            android:hint="@string/join_board_char_hint_number"
+            android:inputType="textVisiblePassword"
+            android:maxLength="1"
+            android:padding="@dimen/dp_20"
+            />
+
+        <EditText
+            android:id="@+id/num_six_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/num_five_text"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_toEndOf="@+id/num_five_text"
+            android:layout_toRightOf="@+id/num_five_text"
+            android:background="@drawable/edit_text_background"
+            android:hint="@string/join_board_char_hint_alphabet"
+            android:inputType="textVisiblePassword"
+            android:maxLength="1"
+            android:padding="@dimen/dp_20"
+            />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/join_board_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relative_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp_30"
+        android:text="@string/join_board_button"/>
+
+</RelativeLayout>

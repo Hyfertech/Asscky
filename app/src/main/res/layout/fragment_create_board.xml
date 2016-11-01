@@ -34,7 +34,7 @@
         android:drawableLeft="@drawable/ic_business"
         android:drawablePadding="@dimen/dp_20"
         android:hint="@string/hint_board_title"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:padding="@dimen/dp_20"/>
 
 
@@ -51,7 +51,7 @@
         android:drawableLeft="@drawable/ic_description"
         android:drawablePadding="@dimen/dp_20"
         android:hint="@string/hint_board_description"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:padding="@dimen/dp_20"/>
 
     <EditText
@@ -67,7 +67,7 @@
         android:drawableLeft="@drawable/ic_note_add"
         android:drawablePadding="@dimen/dp_20"
         android:hint="@string/hint_additional_notes"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:padding="@dimen/dp_20"/>
 
     <Button

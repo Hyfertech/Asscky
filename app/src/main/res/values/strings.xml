@@ -19,6 +19,10 @@
     <string name="progress_bar_creating_account">Creating Account...</string>
     <string name="progress_bar_authenticating">Authenticating...</string>
     <string name="progress_bar_please_wait">Please wait... </string>
+    <string name="progress_bar_creating_your_board">Creating your new board.</string>
+    <string name="progress_bar_will_take_a_second">This will take a few seconds.</string>
+    <string name="progress_bar_joining_board">Joining the board.</string>
+    <string name="progress_bar_sending_text">Sending your message.</string>
 
 
     <!--Error Strings -->
@@ -28,6 +32,10 @@
     <string name="auth_failed_to_login">Failed to login to the account. Please try again.</string>
     <string name="error_board_description_empty">Please enter a board description.</string>
     <string name="error_board_title_empty">You board must have a title.</string>
+    <string name="error_unable_to_create_board">Failed to create a board. Please try again.</string>
+    <string name="error_board_number_missing">Please Enter a board number</string>
+    <string name="error_incomplete_number">Please enter the 6 digit board number.</string>
+    <string name="error_board_doesnt_exist">Seems like the board doesn\'t exist. Try again.</string>
 
     <!--Menu Strings-->
     <string name="menu_sign_out">Sign Out</string>
@@ -57,6 +65,17 @@
     <string name="hint_additional_notes">Notes(Optional)</string>
     <string name="board_reference">boards</string>
 
-    <!--New board Activity-->
+    <!--Join a board-->
+    <string name="enter_board_number">Please enter the board number.</string>
+
+    <!--board Activity-->
     <string name="quit_board_successfully">You have successfully quit the board.</string>
+    <string name="label_board_number">Board Number: </string>
+    <string name="label_board_title">Title : </string>
+    <string name="join_board_button">Join Board</string>
+    <string name="join_board_char_hint_number">1</string>
+    <string name="join_board_char_hint_alphabet">a</string>
+    <string name="send_message">Send</string>
+
+
 </resources>

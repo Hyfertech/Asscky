@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/message_item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/message_item_background"
+    android:padding="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_20"
+    android:paddingTop="@dimen/dp_20">
+
+
+    <TextView
+        android:id="@+id/message_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:textSize="@dimen/message_text_size"
+        tools:text="The goes some text message with a lot of words."/>
+
+    <TextView
+        android:id="@+id/message_date_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/message_text"
+        android:layout_alignRight="@+id/message_text"
+        android:layout_below="@+id/message_text"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="end"
+        android:textAlignment="viewEnd"
+        tools:text="Mon Oct 31 23:03:25 EDT 2016"/>
+</RelativeLayout>
