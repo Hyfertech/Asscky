@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorBackground"
     tools:context="com.hypherweb.www.asscky.View.SignUpActivity">
 
 
@@ -17,9 +18,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:ems="10"
+        android:layout_weight="1"
+        android:background="@drawable/edit_text_background"
+        android:drawableLeft="@drawable/ic_account_circle"
+        android:drawablePadding="@dimen/dp_10"
         android:hint="@string/email_hint"
-        android:inputType="textEmailAddress"/>
+        android:inputType="textEmailAddress"
+        android:padding="@dimen/dp_20"/>
 
     <EditText
         android:id="@+id/signupPasswordText"
@@ -27,17 +32,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/signupEmailText"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:ems="10"
+        android:layout_marginTop="@dimen/dp_30"
+        android:background="@drawable/edit_text_background"
+        android:drawableLeft="@drawable/ic_lock_outline"
+        android:drawablePadding="@dimen/dp_10"
         android:hint="@string/password_hint"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:padding="@dimen/dp_20"/>
 
     <Button
+        android:id="@+id/signupSignupButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up_text"
-        android:id="@+id/signupSignupButton"
         android:layout_below="@+id/signupPasswordText"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="25dp"
+        android:background="@color/colorButton"
+        android:padding="@dimen/dp_10"
+        android:text="@string/sign_up_text"/>
 </RelativeLayout>

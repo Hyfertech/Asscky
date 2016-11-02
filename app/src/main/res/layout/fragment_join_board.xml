@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/dp_20"
+    android:background="@color/colorBackground"
     tools:context="com.hypherweb.www.asscky.View.Fragments.JoinBoardFragment">
 
 
@@ -23,9 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/join_board_title"
         android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal"
         android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_60">
+        android:layout_marginTop="@dimen/dp_60"
+        android:gravity="center_horizontal">
 
         <EditText
             android:id="@+id/num_one_text"
@@ -127,6 +128,8 @@
         android:layout_below="@+id/relative_layout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_30"
+        android:background="@color/colorButton"
+        android:padding="@dimen/dp_10"
         android:text="@string/join_board_button"/>
 
 </RelativeLayout>

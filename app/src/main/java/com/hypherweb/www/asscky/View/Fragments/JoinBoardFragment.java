@@ -195,6 +195,7 @@ public class JoinBoardFragment extends Fragment {
                     });
 
                 } else {
+                    progressDialog.dismiss();
                     Toast.makeText(rootView.getContext(), getString(R.string.error_incomplete_number),
                             Toast.LENGTH_LONG).show();
                 }

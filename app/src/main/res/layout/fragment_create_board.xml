@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/dp_20"
+    android:background="@color/colorBackground"
     tools:context="com.hypherweb.www.asscky.View.Fragments.CreateBoardFragment">
 
 
@@ -77,6 +78,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="116dp"
+        android:background="@color/colorButton"
+        android:padding="@dimen/dp_10"
         android:text="@string/create_board_button"/>
 
 </RelativeLayout>
