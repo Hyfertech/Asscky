@@ -30,7 +30,8 @@
             android:layout_margin="@dimen/dp_10"
             android:layout_weight="1"
             android:background="@color/colorButton"
-            android:text="@string/sign_in_text"/>
+            android:text="@string/sign_in_text"
+            android:textColor="@color/colorBackground"/>
 
         <Button
             android:id="@+id/signUpButton"
@@ -41,7 +42,8 @@
             android:layout_margin="@dimen/dp_10"
             android:layout_weight="1"
             android:background="@color/colorButton"
-            android:text="@string/sign_up_text"/>
+            android:text="@string/sign_up_text"
+            android:textColor="@color/colorBackground"/>
     </LinearLayout>
 
 

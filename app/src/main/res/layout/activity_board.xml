@@ -42,6 +42,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/linearLayout"
         android:layout_below="@+id/board_info_layout"
+
         />
 
     <LinearLayout
@@ -72,6 +73,8 @@
             android:enabled="false"
             android:padding="@dimen/dp_10"
             android:text="@string/send_message"
+            android:background="@color/colorButton"
+            android:textColor="@color/colorBackground"
             />
 
     </LinearLayout>

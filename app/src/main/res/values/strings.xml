@@ -48,6 +48,7 @@
     <!--Fragment Names-->
     <string name="fragment_title_create_board">Create a Board</string>
     <string name="fragment_title_join_board">Join a Board</string>
+    <string name="fragment_title_profile">Profile</string>
 
     <!--Placeholder texts-->
     <string name="placeholder_news_feed_club_name">de Finibus Bonorum</string>
@@ -64,6 +65,7 @@
     <string name="create_board_button">Create Board</string>
     <string name="hint_additional_notes">Notes(Optional)</string>
     <string name="board_reference">boards</string>
+    <string name="user_reference">user</string>
 
     <!--Join a board-->
     <string name="enter_board_number">Please enter the board number.</string>
@@ -76,6 +78,11 @@
     <string name="join_board_char_hint_number">1</string>
     <string name="join_board_char_hint_alphabet">a</string>
     <string name="send_message">Send</string>
+
+    <!--Profile fragment-->
+    <string name="label_board">Boards</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

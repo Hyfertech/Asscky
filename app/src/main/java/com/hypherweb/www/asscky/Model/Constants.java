@@ -31,6 +31,8 @@ public class Constants {
 
     public static final String MESSAGE_OWNER = "owner";
 
+    public static final String BOARDS = "boards";
+
     //public final String MESSAGE_UUID = "key";
 
     // Check network connection

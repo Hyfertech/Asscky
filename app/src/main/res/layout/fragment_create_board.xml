@@ -75,11 +75,12 @@
         android:id="@+id/create_board_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/board_notes_optional"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="116dp"
+        android:layout_marginTop="@dimen/dp_30"
         android:background="@color/colorButton"
         android:padding="@dimen/dp_10"
-        android:text="@string/create_board_button"/>
+        android:text="@string/create_board_button"
+        android:textColor="@color/colorBackground"/>
 
 </RelativeLayout>

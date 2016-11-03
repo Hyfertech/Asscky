@@ -40,12 +40,15 @@ public class CreateBoardFragment extends Fragment {
     EditText mBoardNotesOptional;
     Button mCreateBoardButton;
     String mBoardsReference;
+    String mUserReference;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
 
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef;
+    DatabaseReference mBoardsDBRef;
+    DatabaseReference mUserDBRef;
 
 
     public CreateBoardFragment() {
@@ -59,8 +62,11 @@ public class CreateBoardFragment extends Fragment {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_create_board, container, false);
         mBoardsReference = getString(R.string.board_reference);
+        mUserReference = getString(R.string.user_reference);
 
-        myRef = database.getReference(mBoardsReference);
+        mBoardsDBRef = database.getReference(mBoardsReference);
+        mUserDBRef = database.getReference(mUserReference);
+
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
 
@@ -75,10 +81,20 @@ public class CreateBoardFragment extends Fragment {
             public void onClick(View v) {
                 if (validateBoardInfo()) {
                     final String boardNum = getRandomString(6);
+                    //TODO Limit the number of boards for each person.
+//                    Map<String, Object> userBoard = new HashMap<String, Object>();
+//                    userBoard.put()
+//                    mUserDBRef.updateChildren();
+//                    Map<String, Object> userBoard = new HashMap<String, Object>();
+//                    userBoard.put(mFirebaseUser.getUid(), )
+//                    mUserDBRef.updateChildren();
+//                    mUserDBRef = database.getReference(mUserReference + "/" + mBoardsReference + "/");
+
+
                     String boardTitle = mBoardTitle.getText().toString();
                     String boardAdditionalNotes = mBoardNotesOptional.getText().toString();
                     String boardDescription = mBoardDescription.getText().toString();
-                    final Board board = new Board(boardTitle, boardDescription, mFirebaseUser.getEmail(), boardNum ,boardAdditionalNotes);
+                    final Board board = new Board(boardTitle, boardDescription, mFirebaseUser.getEmail(), boardNum, boardAdditionalNotes);
                     Map<String, Object> childUpdates = board.toMap();
                     Map<String, Object> currentBoard = new HashMap();
                     currentBoard.put(boardNum, childUpdates);
@@ -88,7 +104,7 @@ public class CreateBoardFragment extends Fragment {
                             getString(R.string.progress_bar_will_take_a_second));
                     progressDialog.show();
 
-                    myRef.updateChildren(currentBoard, new DatabaseReference.CompletionListener() {
+                    mBoardsDBRef.updateChildren(currentBoard, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                             if (databaseError != null) {

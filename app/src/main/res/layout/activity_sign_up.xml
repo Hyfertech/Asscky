@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/colorBackground"
     tools:context="com.hypherweb.www.asscky.View.SignUpActivity">
 
 
@@ -49,5 +49,6 @@
         android:layout_marginTop="25dp"
         android:background="@color/colorButton"
         android:padding="@dimen/dp_10"
-        android:text="@string/sign_up_text"/>
+        android:text="@string/sign_up_text"
+        android:textColor="@color/colorBackground"/>
 </RelativeLayout>

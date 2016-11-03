@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hypherweb.www.asscky.Adaptor.DividerItemDecoration;
 import com.hypherweb.www.asscky.Adaptor.MessageViewHolder;
 import com.hypherweb.www.asscky.Model.Constants;
 import com.hypherweb.www.asscky.Model.Messages;
@@ -75,6 +76,8 @@ public class BoardActivity extends AppCompatActivity {
         mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setStackFromEnd(true);
         mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
+        mMessageRecyclerView.addItemDecoration(
+                new DividerItemDecoration(this, null));
 
 
         myRef = database.getReference(getString(R.string.board_reference) + "/" + mBoardNum + "/" + Constants.BOARD_MESSAGES + "/");

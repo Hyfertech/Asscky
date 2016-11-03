@@ -29,6 +29,9 @@ public class HomePageAdaptor extends FragmentPagerAdapter {
         } else {
             return new JoinBoardFragment();
         }
+//        else {
+//            return new ProfileFragment();
+//        }
     }
 
     @Override
@@ -43,6 +46,9 @@ public class HomePageAdaptor extends FragmentPagerAdapter {
         } else {
             return mContext.getString(R.string.fragment_title_join_board);
         }
+//        else {
+//            return mContext.getString(R.string.fragment_title_profile);
+//        }
 
     }
 }

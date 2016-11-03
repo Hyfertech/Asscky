@@ -1,0 +1,46 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/dp_20"
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
+    tools:context="com.hypherweb.www.asscky.View.Fragments.ProfileFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textSize="@dimen/label_text_size"
+            android:drawableLeft="@drawable/ic_account_circle"
+            android:drawablePadding="@dimen/dp_10"
+            android:text="@string/email_hint"/>
+
+        <TextView
+            android:id="@+id/profile_email_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_10"
+            tools:text="example@domian.com"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:textSize="@dimen/label_text_size"
+        android:text="@string/label_board"/>
+
+    <ListView
+        android:id="@+id/boards_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+</LinearLayout>
