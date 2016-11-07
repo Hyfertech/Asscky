@@ -9,42 +9,51 @@
     android:background="@color/colorBackground"
     tools:context=".View.MainActivity">
 
-
-    <LinearLayout
-        android:id="@+id/button_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="@dimen/dp_30"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:layout_alignParentBottom="true">
 
-        <Button
-            android:id="@+id/signInButton"
+        <LinearLayout
+            android:id="@+id/button_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/dp_10"
-            android:layout_weight="1"
-            android:background="@color/colorButton"
-            android:text="@string/sign_in_text"
-            android:textColor="@color/colorBackground"/>
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
 
-        <Button
-            android:id="@+id/signUpButton"
-            android:layout_width="match_parent"
+            <Button
+                android:id="@+id/signInButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@color/colorButton"
+                android:text="@string/sign_in_text"
+                android:textColor="@color/colorBackground"/>
+
+            <Button
+                android:id="@+id/signUpButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@color/colorButton"
+                android:text="@string/sign_up_text"
+                android:textColor="@color/colorBackground"/>
+        </LinearLayout>
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/google_sign_in_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/signInButton"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/dp_10"
-            android:layout_weight="1"
-            android:background="@color/colorButton"
-            android:text="@string/sign_up_text"
-            android:textColor="@color/colorBackground"/>
-    </LinearLayout>
+            android:layout_below="@+id/button_linear_layout"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
 
 
 </RelativeLayout>

@@ -36,6 +36,7 @@
     <string name="error_board_number_missing">Please Enter a board number</string>
     <string name="error_incomplete_number">Please enter the 6 digit board number.</string>
     <string name="error_board_doesnt_exist">Seems like the board doesn\'t exist. Try again.</string>
+    <string name="error_unable_send_message">Failed to send your message. Please try again.</string>
 
     <!--Menu Strings-->
     <string name="menu_sign_out">Sign Out</string>
@@ -57,6 +58,8 @@
         ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
         ullamco laboris nisi ut aliquip ex ea commodo consequat.
     </string>
+    <string name="placeholder_name">Name</string>
+    <string name="placeholder_email">youremail@domain.com</string>
 
     <!--Create board fragment-->
     <string name="label_board_info">Board Info</string>
@@ -78,6 +81,7 @@
     <string name="join_board_char_hint_number">1</string>
     <string name="join_board_char_hint_alphabet">a</string>
     <string name="send_message">Send</string>
+    <string name="exit_press_back_twice_message">Press the back button twice to exit the board.</string>
 
     <!--Profile fragment-->
     <string name="label_board">Boards</string>

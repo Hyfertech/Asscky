@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.hypherweb.www.asscky.Adaptor.HomePageAdaptor;
 import com.hypherweb.www.asscky.R;
 
@@ -20,7 +18,6 @@ public class HomePageActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = HomePageActivity.class.getSimpleName();
 
-    private FirebaseUser mUser;
 
 
     @Override
@@ -28,8 +25,13 @@ public class HomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        mUser = FirebaseAuth.getInstance().getCurrentUser();
-        Log.d(LOG_TAG, mUser.getEmail());
+        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+            // Activity was brought to front and not created,
+            // Thus finishing this will get us to the last viewed activity
+            finish();
+            return;
+        }
+
 
         // Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -62,6 +64,7 @@ public class HomePageActivity extends AppCompatActivity {
             Toast.makeText(HomePageActivity.this, R.string.signed_out_toast, Toast.LENGTH_LONG).show();
             Intent signOut = new Intent(HomePageActivity.this, MainActivity.class);
             startActivity(signOut);
+            finish();
         }
         return true;
     }

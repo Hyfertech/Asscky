@@ -6,4 +6,6 @@
     <color name="colorButton">#328436</color>
     <color name="colorBackground">#F1F9F2</color>
     <color name="colorTabUnselected">#66BB6A</color>
+    <color name="colorSecondaryDark">#BF360C</color>
+    <color name="colorSecondayBackground">#FBE9E7</color>
 </resources>

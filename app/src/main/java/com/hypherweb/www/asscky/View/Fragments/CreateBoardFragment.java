@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -81,16 +82,6 @@ public class CreateBoardFragment extends Fragment {
             public void onClick(View v) {
                 if (validateBoardInfo()) {
                     final String boardNum = getRandomString(6);
-                    //TODO Limit the number of boards for each person.
-//                    Map<String, Object> userBoard = new HashMap<String, Object>();
-//                    userBoard.put()
-//                    mUserDBRef.updateChildren();
-//                    Map<String, Object> userBoard = new HashMap<String, Object>();
-//                    userBoard.put(mFirebaseUser.getUid(), )
-//                    mUserDBRef.updateChildren();
-//                    mUserDBRef = database.getReference(mUserReference + "/" + mBoardsReference + "/");
-
-
                     String boardTitle = mBoardTitle.getText().toString();
                     String boardAdditionalNotes = mBoardNotesOptional.getText().toString();
                     String boardDescription = mBoardDescription.getText().toString();
@@ -98,6 +89,18 @@ public class CreateBoardFragment extends Fragment {
                     Map<String, Object> childUpdates = board.toMap();
                     Map<String, Object> currentBoard = new HashMap();
                     currentBoard.put(boardNum, childUpdates);
+                    //TODO Limit the number of boards for each person.
+
+                    mUserDBRef = database.getReference(mUserReference + "/" + mFirebaseUser.getUid() + "/" + mBoardsReference + "/");
+                    mUserDBRef.updateChildren(currentBoard, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                            if (databaseError != null) {
+                                FirebaseCrash.report(new Exception(databaseError.toException()));
+                            }
+                        }
+                    });
+
 
                     final ProgressDialog progressDialog = ProgressDialog.show(getActivity(),
                             getString(R.string.progress_bar_creating_your_board),

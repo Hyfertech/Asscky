@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +19,7 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hypherweb.www.asscky.Adaptor.DividerItemDecoration;
 import com.hypherweb.www.asscky.Adaptor.MessageViewHolder;
+import com.hypherweb.www.asscky.Model.Board;
 import com.hypherweb.www.asscky.Model.Constants;
 import com.hypherweb.www.asscky.Model.Messages;
 import com.hypherweb.www.asscky.R;
@@ -41,12 +42,15 @@ public class BoardActivity extends AppCompatActivity {
     TextView mBoardNumber;
     Button mSendButton;
     EditText mMessageText;
+    Board mBoard;
+    private boolean doubleBackToExitPressedOnce = false;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef;
+    DatabaseReference mBoardMessagesDBRef;
+    DatabaseReference mBoardDBRef;
     private RecyclerView mMessageRecyclerView;
 
     private FirebaseRecyclerAdapter<Messages, MessageViewHolder>
@@ -80,18 +84,36 @@ public class BoardActivity extends AppCompatActivity {
                 new DividerItemDecoration(this, null));
 
 
-        myRef = database.getReference(getString(R.string.board_reference) + "/" + mBoardNum + "/" + Constants.BOARD_MESSAGES + "/");
+        mBoardMessagesDBRef = database.getReference(getString(R.string.board_reference) + "/" + mBoardNum + "/" + Constants.BOARD_MESSAGES + "/");
+        mBoardDBRef = database.getReference(getString(R.string.board_reference) + "/" + mBoardNum + "/");
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        mBoardDBRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, "onDataChange: " + dataSnapshot.toString());
-                Messages messages = dataSnapshot.getValue(Messages.class);
+                mBoard = dataSnapshot.getValue(Board.class);
+                setTitle(mBoard.getTitle());
+
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                FirebaseCrash.log(TAG + databaseError.toString());
+            }
+        });
 
+
+        mBoardMessagesDBRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //Log.d(TAG, "onDataChange: " + dataSnapshot.toString());
+                Messages messages = dataSnapshot.getValue(Messages.class);
+                //
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                FirebaseCrash.log(TAG + databaseError.toString());
             }
         });
 
@@ -127,11 +149,17 @@ public class BoardActivity extends AppCompatActivity {
                 Messages message = new
                         Messages(mMessageText.getText().toString().trim(),
                         mFirebaseUser.getEmail(), date);
-                myRef.push().setValue(message, new DatabaseReference.CompletionListener() {
+                mBoardMessagesDBRef.push().setValue(message, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                        mMessageText.setText("");
-                        progressDialog.dismiss();
+                        if (databaseError != null) {
+                            Toast.makeText(BoardActivity.this,
+                                    getString(R.string.error_unable_send_message), Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
+                        } else {
+                            mMessageText.setText("");
+                            progressDialog.dismiss();
+                        }
                     }
                 });
 
@@ -143,12 +171,32 @@ public class BoardActivity extends AppCompatActivity {
                 Messages.class,
                 R.layout.message_item,
                 MessageViewHolder.class,
-                myRef) {
+                mBoardMessagesDBRef) {
 
             @Override
-            protected void populateViewHolder(MessageViewHolder viewHolder, Messages model, int position) {
+            protected void populateViewHolder(final MessageViewHolder viewHolder, final Messages model, int position) {
                 viewHolder.mMessageText.setText(model.getMessage());
                 viewHolder.mDateText.setText(model.getDate());
+                if (model.getOwner().equals(mFirebaseUser.getEmail())) {
+
+                    viewHolder.itemView.setBackgroundResource(R.drawable.sender_message_item_background);
+                } else {
+                    viewHolder.itemView.setBackgroundResource(R.drawable.message_item_background);
+                }
+                mBoardDBRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Board board = dataSnapshot.getValue(Board.class);
+                        if (board.getOwner().equals(model.getOwner())) {
+                            viewHolder.itemView.setBackgroundResource(R.drawable.owner_message_item_background);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        FirebaseCrash.log(TAG + databaseError.toString());
+                    }
+                });
             }
 
         };
@@ -186,15 +234,17 @@ public class BoardActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.signOut) {
+        if (id == R.id.action_board_sign_out) {
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(BoardActivity.this, R.string.signed_out_toast, Toast.LENGTH_LONG).show();
             Intent signOut = new Intent(BoardActivity.this, MainActivity.class);
             startActivity(signOut);
-        } else if (id == R.id.new_board_quite_board) {
+            finish();
+        } else if (id == R.id.action_board_quit) {
             Toast.makeText(BoardActivity.this, R.string.quit_board_successfully, Toast.LENGTH_LONG).show();
             Intent quiteBoard = new Intent(BoardActivity.this, HomePageActivity.class);
             startActivity(quiteBoard);
+            finish();
         }
         return true;
     }
@@ -206,4 +256,21 @@ public class BoardActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // .... other stuff in my onResume ....
+        this.doubleBackToExitPressedOnce = false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, R.string.exit_press_back_twice_message, Toast.LENGTH_SHORT).show();
+    }
 }

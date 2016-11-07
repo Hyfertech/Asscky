@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.crash.FirebaseCrash;
 import com.hypherweb.www.asscky.R;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -61,7 +61,8 @@ public class SignUpActivity extends AppCompatActivity {
                             .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    Log.d(LOG_TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+                                    //Log.d(LOG_TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+                                    FirebaseCrash.log("User Created" + task.isSuccessful());
                                     mProgressDialog.dismiss();
                                     // If sign in fails, display a message to the user. If sign in succeeds
                                     // the auth state listener will be notified and logic to handle the
@@ -100,14 +101,16 @@ public class SignUpActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d(LOG_TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    FirebaseCrash.log(LOG_TAG +"onAuthStateChanged:signed_in:" + user.getUid());
                     Intent homePage = new Intent(SignUpActivity.this, HomePageActivity.class);
                     startActivity(homePage);
                     finish();
 
                 } else {
                     // User is signed out
-                    Log.d(LOG_TAG, "onAuthStateChanged:signed_out");
+                    //Log.d(LOG_TAG, "onAuthStateChanged:signed_out");
+                    //FirebaseCrash.report(new Exception("My first Android non-fatal error"));
+                    FirebaseCrash.log(LOG_TAG + "  onAuthStateChanged:signed_out");
                 }
             }
         };
@@ -121,8 +124,6 @@ public class SignUpActivity extends AppCompatActivity {
         String emailError = getResources().getString(R.string.error_validator_email);
         String passwordError = getResources().getString(R.string.error_validator_password);
 
-        //TODO
-        //Compare email domains with university domains.
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             mEmailText.setError(emailError);
             valid = false;

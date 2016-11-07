@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.crash.FirebaseCrash;
 import com.hypherweb.www.asscky.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -62,13 +62,13 @@ public class LoginActivity extends AppCompatActivity {
                             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    Log.d(LOG_TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+                                    FirebaseCrash.log(LOG_TAG + " signInWithEmail:onComplete:" + task.isSuccessful());
                                     mProgressDialog.dismiss();
                                     // If sign in fails, display a message to the user. If sign in succeeds
                                     // the auth state listener will be notified and logic to handle the
                                     // signed in user can be handled in the listener.
                                     if (!task.isSuccessful()) {
-                                        Log.w(LOG_TAG, "signInWithEmail:failed", task.getException());
+                                        FirebaseCrash.log(LOG_TAG + "signInWithEmail:failed " + task.getException().toString());
                                         Toast.makeText(LoginActivity.this, R.string.auth_failed_to_login,
                                                 Toast.LENGTH_SHORT).show();
                                     }
@@ -101,14 +101,14 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d(LOG_TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    FirebaseCrash.logcat(0 , "onAuthStateChanged:signed_in:" ,  user.getUid());
                     Intent homePage = new Intent(LoginActivity.this, HomePageActivity.class);
                     startActivity(homePage);
                     finish();
 
                 } else {
                     // User is signed out
-                    Log.d(LOG_TAG, "onAuthStateChanged:signed_out");
+                    FirebaseCrash.log(LOG_TAG +  " onAuthStateChanged:signed_out");
                 }
                 // ...
             }
