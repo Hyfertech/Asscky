@@ -44,11 +44,13 @@ public class BoardActivity extends AppCompatActivity {
     EditText mMessageText;
     Board mBoard;
     private boolean doubleBackToExitPressedOnce = false;
+    String mBoardsReference;
+    String mUserReference;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     DatabaseReference mBoardMessagesDBRef;
     DatabaseReference mBoardDBRef;
     private RecyclerView mMessageRecyclerView;
@@ -56,7 +58,6 @@ public class BoardActivity extends AppCompatActivity {
     private FirebaseRecyclerAdapter<Messages, MessageViewHolder>
             mFirebaseAdapter;
     private LinearLayoutManager mLinearLayoutManager;
-    private DataSnapshot mFirebaseDatabaseReference;
 
 
     @Override
@@ -71,6 +72,9 @@ public class BoardActivity extends AppCompatActivity {
         mSendButton = (Button) findViewById(R.id.send_button);
         mMessageText = (EditText) findViewById(R.id.message_text);
 
+        mBoardsReference = getString(R.string.board_reference);
+        mUserReference = getString(R.string.user_reference);
+
 
         Intent intent = getIntent();
         mBoardNum = intent.getStringExtra(Constants.BOARD_NUMBER);
@@ -84,16 +88,14 @@ public class BoardActivity extends AppCompatActivity {
                 new DividerItemDecoration(this, null));
 
 
-        mBoardMessagesDBRef = database.getReference(getString(R.string.board_reference) + "/" + mBoardNum + "/" + Constants.BOARD_MESSAGES + "/");
-        mBoardDBRef = database.getReference(getString(R.string.board_reference) + "/" + mBoardNum + "/");
+        mBoardMessagesDBRef = mDatabase.getReference(getString(R.string.board_reference) + "/" + mBoardNum + "/" + Constants.BOARD_MESSAGES + "/");
+        mBoardDBRef = mDatabase.getReference(getString(R.string.board_reference) + "/" + mBoardNum + "/");
 
         mBoardDBRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mBoard = dataSnapshot.getValue(Board.class);
                 setTitle(mBoard.getTitle());
-
-
             }
 
             @Override
@@ -246,6 +248,11 @@ public class BoardActivity extends AppCompatActivity {
             startActivity(quiteBoard);
             finish();
         }
+        //TODO Add save board
+//        else if( id == R.id.action_save_board){
+//            DatabaseReference databaseReference = mDatabase.getReference(mUserReference + "/" + mFirebaseUser.getUid() + "/" + mBoardsReference + "/");
+//
+//        }
         return true;
     }
 

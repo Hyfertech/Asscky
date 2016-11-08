@@ -6,45 +6,51 @@
     android:layout_height="match_parent"
     android:layout_margin="@dimen/dp_20"
     android:background="@color/colorBackground"
+    android:padding="@dimen/dp_10"
     tools:context="com.hypherweb.www.asscky.View.Fragments.ProfileFragment">
 
+    <RelativeLayout
+        android:id="@+id/relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/profile_image"
-        android:layout_width="@dimen/dp_100"
-        android:layout_height="@dimen/dp_100"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dp_10"
-        android:src="@drawable/profile_picture_placeholder"
-        app:civ_border_color="@color/colorPrimaryDark"
-        app:civ_border_width="@dimen/dp_5"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_10"
+            android:src="@drawable/profile_picture_placeholder"
+            app:civ_border_color="@color/colorPrimaryDark"
+            app:civ_border_width="@dimen/dp_5"/>
+
+        <TextView
+            android:id="@+id/name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="@string/placeholder_name"
+            android:textSize="@dimen/label_text_size"/>
+
+        <TextView
+            android:id="@+id/email_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name_text_view"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="@string/placeholder_email"
+            android:textSize="@dimen/label_text_size"/>
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/name_text_view"
+        android:id="@+id/board_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/profile_image"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dp_30"
-        android:textSize="@dimen/label_text_size"
-        tools:text="@string/placeholder_name"/>
-
-    <TextView
-        android:id="@+id/email_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/name_text_view"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dp_30"
-        android:textSize="@dimen/label_text_size"
-        tools:text="@string/placeholder_email"/>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/email_text_view"
+        android:layout_below="@id/relative_layout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_30"
         android:text="@string/label_board"
@@ -54,7 +60,9 @@
         android:id="@+id/boards_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/textView3"
+        android:layout_below="@id/board_label"
+        android:layout_marginTop="@dimen/dp_20"
+        android:drawSelectorOnTop="true"
         >
     </ListView>
 

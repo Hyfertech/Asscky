@@ -26,9 +26,6 @@ public class Board implements Parcelable {
     public Board() {
     }
 
-    public Board(HashMap<String, Object> board) {
-
-    }
 
     public Board(String title, String description, String owner, String boardNumber, String additionalNotes) {
         mTitle = title;
@@ -49,6 +46,13 @@ public class Board implements Parcelable {
         mDescription = in.readString();
         mBoardNumber = in.readString();
         mAdditionalNotes = in.readString();
+    }
+
+    public Board(HashMap<String, Object> boardMap) {
+        mTitle = (String) boardMap.get(Constants.BOARD_TITLE);
+        mOwner = (String) boardMap.get(Constants.BOARD_OWNER_EMAIL);
+        mDescription = (String) boardMap.get(Constants.BOARD_DESCRIPTION);
+        mBoardNumber = (String) boardMap.get(Constants.BOARD_NUMBER);
     }
 
     public static final Creator<Board> CREATOR = new Creator<Board>() {
